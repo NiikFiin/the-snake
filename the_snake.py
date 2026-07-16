@@ -1,4 +1,4 @@
-from random import randrange, choice
+from random import randint, choice
 
 import pygame
 
@@ -49,7 +49,7 @@ class GameObject:
         self.position = (
             SCREEN_WIDTH / 2,
             SCREEN_HEIGHT / 2
-        )    # Позиция объекта
+        )                         # Позиция объекта
         self.body_color = None    # Цвет объекта
 
     def draw(self):
@@ -67,8 +67,8 @@ class Apple(GameObject):
     def randomize_position(self):
         """Метод отвечает за случайное положение яблока на игровом поле"""
         self.position = (
-            randrange(0, SCREEN_WIDTH, GRID_SIZE),
-            randrange(0, SCREEN_HEIGHT, GRID_SIZE)
+            randint(0, int(SCREEN_WIDTH / GRID_SIZE)) * GRID_SIZE,
+            randint(0, int(SCREEN_HEIGHT / GRID_SIZE)) * GRID_SIZE
         )
 
     def draw(self):
