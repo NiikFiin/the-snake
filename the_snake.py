@@ -52,11 +52,15 @@ class GameObject:
         )
         self.body_color = None
 
+    def draw(self) -> None:
+        """Метод отрисовки, который будет переопределен в дочерних классах"""
+        raise NotImplementedError
+
     def draw_cell(
         self, position: tuple[int, int],
         body_color: tuple[int, int, int]
     ) -> None:
-        """Отрисовка обьектов"""
+        """Основной метод отрисовки обьектов"""
         rect = pygame.Rect(position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, body_color, rect)
         if body_color == self.body_color:
