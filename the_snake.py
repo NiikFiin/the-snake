@@ -63,28 +63,6 @@ class GameObject:
             pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
 
-class Apple(GameObject):
-    """Содержит основные методы и атрибуты яблока"""
-
-    def __init__(self) -> None:
-        super().__init__()               # Наследуем атрибуты базового класса
-        self.body_color = APPLE_COLOR    # Задаем цвет яблока
-
-    def randomize_position(self, snake_object: Snake) -> None:
-        """Метод отвечает за случайное положение яблока на игровом поле"""
-        while True:
-            self.position = (
-                randint(0, int(SCREEN_WIDTH / GRID_SIZE) - 1) * GRID_SIZE,
-                randint(0, int(SCREEN_HEIGHT / GRID_SIZE) - 1) * GRID_SIZE
-            )
-            if self.position not in snake_object.positions:
-                break
-
-    def draw(self) -> None:
-        """Отрисовка яблока на игровом поле"""
-        self.draw_cell(self.position, self.body_color)
-
-
 class Snake(GameObject):
     """Содержит основные атрибуты и методы змейки"""
 
@@ -137,6 +115,28 @@ class Snake(GameObject):
         self.length = START_SNAKE_LENGTH
         self.positions = [self.position]
         self.direction = choice((RIGHT, LEFT, UP, DOWN))
+
+
+class Apple(GameObject):
+    """Содержит основные методы и атрибуты яблока"""
+
+    def __init__(self) -> None:
+        super().__init__()               # Наследуем атрибуты базового класса
+        self.body_color = APPLE_COLOR    # Задаем цвет яблока
+
+    def randomize_position(self, snake_object: Snake) -> None:
+        """Метод отвечает за случайное положение яблока на игровом поле"""
+        while True:
+            self.position = (
+                randint(0, int(SCREEN_WIDTH / GRID_SIZE) - 1) * GRID_SIZE,
+                randint(0, int(SCREEN_HEIGHT / GRID_SIZE) - 1) * GRID_SIZE
+            )
+            if self.position not in snake_object.positions:
+                break
+
+    def draw(self) -> None:
+        """Отрисовка яблока на игровом поле"""
+        self.draw_cell(self.position, self.body_color)
 
 
 def handle_keys(snake_object: Snake) -> None:
